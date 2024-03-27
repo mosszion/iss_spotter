@@ -31,6 +31,33 @@ const fetchMyIP = function(callback) {
   });
 }
 
+const fetchCoordsByIp = function (ip,callback) {
 
-module.exports = { fetchMyIP };
+  // using request to fetch coordinates of an Ip address
+  
+  const url = `http://ipwho.is/${ip}`
+
+  request(`${url}`,(error,response,body) => {
+    if (error) {
+      callback(error, null);
+      return
+    }
+    
+    const data = JSON.parse(body);
+       if (!data.success){
+        const message = `Success status was ${data.success}. Server message says: ${data.message} when fetching for IP ${data.ip}`; 
+        callback(Error(message), null);
+        return;
+       }
+
+    const {latitude, longitude }= data ;
+   
+    callback(null, {latitude, longitude});
+
+  });
+}
+
+
+module.exports = { fetchMyIP,
+                   fetchCoordsByIp };
 
