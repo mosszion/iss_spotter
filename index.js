@@ -43,3 +43,4 @@ printPassTimes(passTimes);
 })
 
 
+module.exports ={ printPassTimes}
