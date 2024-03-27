@@ -76,7 +76,7 @@ const fetchISSFlyOverTimes = function (coords, callback) {
   const url = `https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`
     
   
-  require(url, (error,response,body) => {
+  request(url, (error,response,body) => {
     if (error) {
       callback(error,null);
       return;
